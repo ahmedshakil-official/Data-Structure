@@ -111,4 +111,75 @@ public class ArrayProblems {
         arr[arr.length-1] = tmp;
     }
 
+    void lRotateByDNaive(int d){
+        while(d>0){
+            lRotateOne();
+            d--;
+        }
+    }
+
+    void lRotateByDBetter(int d){
+        int i;
+        int [] tmp=new int[d];
+        for(i=0;i<d;i++)
+            tmp[i]=arr[i];
+        for (i=d;i<arr.length;i++)
+            arr[i-d]=arr[i];
+        for (i=0;i<d;i++)
+            arr[arr.length-d+i]=tmp[i];
+    }
+
+    void rev(int low, int high){
+        while (low<high){
+            int tmp= arr[low];
+            arr[low] = arr[high];
+            arr[high] = tmp;
+            low++;
+            high--;
+        }
+    }
+    //1st rev 0-d
+    //2nd rev d-array size
+    //3rd rev 0-array size
+
+    void lRotateByD(int d){
+        rev(0, d-1);
+        rev(d, arr.length-1);
+        rev(0, arr.length-1);
+    }
+
+    void moveZerosToEndNaive(){
+        int i;
+        int j;
+        for (i = 0; i<arr.length;i++){
+
+            if(arr[i] == 0){
+                for (j=i+1; j<arr.length; j++){
+                    if(arr[j] != 0){
+                        //System.out.println(arr[j]);
+                        //2,3,3,7, 9, 0, 0, 0,  0, 0
+                        int tmp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = tmp;
+                        break;
+                        //System.out.println(arr[i]);
+                    }
+                }
+            }
+        }
+    }
+
+    void moveZerosToEnd(){
+        int i;
+        int count = 0;
+        for(i = 0; i < arr.length; i++){
+            if(arr[i] != 0){
+                int tmp = arr[i];
+                arr[i] = arr[count];
+                arr[count] = tmp;
+                count++;
+            }
+        }
+    }
+
 }
